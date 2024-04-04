@@ -1,12 +1,11 @@
 package employeemanagement.com.employees.Model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import lombok.Data;
 
 import java.util.List;
 
 @Entity
-@Data
 @Table(name="Department")
 public class Department {
     @Id
@@ -24,7 +23,7 @@ public class Department {
 
     }
 
-    public Department(String name, int emp_id) {
+    public Department(@JsonProperty("name") String name, int emp_id) {
         this.name = name;
     }
 

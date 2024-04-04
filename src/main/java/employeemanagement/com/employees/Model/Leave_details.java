@@ -1,12 +1,10 @@
 package employeemanagement.com.employees.Model;
 
 import jakarta.persistence.*;
-import lombok.Data;
 
 import java.time.LocalDate;
 
 @Entity
-@Data
 @Table(name="Leave_details")
 public class Leave_details {
     @Id

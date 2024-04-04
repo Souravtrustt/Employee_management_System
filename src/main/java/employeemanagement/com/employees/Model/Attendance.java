@@ -1,21 +1,18 @@
 package employeemanagement.com.employees.Model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-//import org.springframework.data.annotation.Id;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity
-@Data
 @Table(name = "attendance")
 public class Attendance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-    @Column(name = "presentdate")
+    @Column(name = "presentdate",unique = true)
     private LocalDate presentdate;
 
     @Column(name = "check_in")

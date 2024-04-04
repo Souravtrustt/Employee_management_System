@@ -26,13 +26,16 @@ public class EmployeeController {
         this.roleService = roleService;
     }
     @PostMapping("/add/{dept}/{role}")
-    public Employee addEmployee(@PathVariable(value="dept") String dept,@PathVariable(value="role") String roleName,@RequestBody Employee emp)
+    public Employee addEmployee(@PathVariable(value="dept") String deptName,@PathVariable(value="role") String roleName,@RequestBody Employee emp)
     {
-        Department department = deptService.findByDeptName(dept);
-        emp.setDepartment(department);
-
+        System.out.println(emp);
         Role role = roleService.findByRole(roleName);
         emp.setRole(role);
+
+        Department department = deptService.findByDeptName(deptName);
+        emp.setDepartment(department);
+
+
         Employee em=employeeService.save(emp);
         return em;
     }
@@ -51,15 +54,18 @@ public class EmployeeController {
         }
         return theEmployee;
     }
+
     @GetMapping("/employee/{email}")
     public Employee getEmail(@PathVariable(value="email") String email){
         Employee theEmployee = employeeService.findByEmail(email);
         return theEmployee;
     }
+
     @PutMapping("/employees/{emp_id}")
     public Employee updateEmployee(@PathVariable int emp_id, @RequestBody Employee updatedEmployee) {
         return employeeService.update(emp_id, updatedEmployee);
     }
+
     @DeleteMapping("/employees/{emp_id}")
     private void deleteEmployee(@PathVariable("emp_id") int emp_id)
     {

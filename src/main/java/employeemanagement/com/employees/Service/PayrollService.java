@@ -13,4 +13,5 @@ public interface PayrollService {
     Payroll findById(int payroll_id);
     void deleteById(int payroll_id);
 
+//    Payroll findByEmpId(int empId);
 }

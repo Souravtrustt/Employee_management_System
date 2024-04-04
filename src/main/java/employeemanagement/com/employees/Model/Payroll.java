@@ -1,11 +1,8 @@
 package employeemanagement.com.employees.Model;
 
 import jakarta.persistence.*;
-import jdk.jfr.DataAmount;
-import lombok.Data;
 
 @Entity
-@Data
 @Table(name="payroll")
 public class Payroll {
     @Id

@@ -58,6 +58,12 @@ public class PayrollServiceImpl implements PayrollService{
         thePayrollRepository.deleteById(payroll_id);
     }
 
+//    @Override
+//    public Payroll findByEmpId(int empId) {
+//
+//        return thePayrollRepository.findByEmpId(empId);
+//    }
+
 
 }
 

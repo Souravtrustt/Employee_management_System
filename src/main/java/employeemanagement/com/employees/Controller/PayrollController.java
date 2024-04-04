@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 //added rest controller
 //added cross origin
 @RestController
@@ -23,9 +24,26 @@ public class PayrollController {
     @PostMapping("/addPayroll/{empId}")
     public Payroll addPayroll(@PathVariable(value="empId") int id,@RequestBody Payroll thePayroll)
     {
+//        Map<String, Object> result = new HashMap<>();
+//        boolean isPresent = false;
+//        String message = "";
         Employee emp = theEmployeService.findById(id);
         thePayroll.setEmployee(emp);
 
+//        List<Payroll> data = thePayrollService.findAll();
+//        for(int i =0; i<data.size(); i++){
+//            Payroll check = data.get(i);
+//            if(check.getEmployee().equals(emp))
+//            {
+//                isPresent = true;
+//                message = "Id already exists.";
+//                result.put("employee",emp);
+//                break;
+//            }
+//        }
+//        result.put("message",message);
+//        result.put("status",isPresent);
+//        Payroll checkPay = thePayrollService.findByEmpId(emp);
         Payroll payroll=thePayrollService.save(thePayroll);
         return payroll;
     }
@@ -34,6 +52,7 @@ public class PayrollController {
     {
         return thePayrollService.findAll();
     }
+    
     @PutMapping("/payroll/{payroll_id}")
     public Payroll updatepayroll(@PathVariable int payroll_id,@RequestBody Payroll updatePayroll)
     {
@@ -53,5 +72,10 @@ public class PayrollController {
     {
        thePayrollService.deleteById(payroll_id);
     }
+
+//    @GetMapping("/payroll/{empId}")
+//    public Payroll findPayrollByEmp(@PathVariable(value="empId") int id){
+//        return thePayrollService.findByEmpId(id);
+//    }
 
 }

@@ -6,7 +6,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 @Service
@@ -16,10 +16,23 @@ public class AttendanceServiceImpl implements AttendanceService {
    public AttendanceServiceImpl(AttendanceRepository theAttendanceRepository) {
        this.theAttendanceRepository = theAttendanceRepository;
    }
-    @Override
+
+   @Override
     @Transactional
     public Attendance save(Attendance theAttendance) {
-     return theAttendanceRepository.save(theAttendance);
+        Attendance checkAttend = theAttendanceRepository.findByPresentDate(theAttendance.getPresentdate());
+        if(checkAttend != null){
+            int val = checkAttend.getCheck_in().compareTo(theAttendance.getCheck_in());
+            if(val < 0){
+                theAttendance.setCheck_in(checkAttend.getCheck_in());
+                int id = checkAttend.getId();
+                theAttendance.setId(id);
+            }
+            else {
+                theAttendance.setId(checkAttend.getId());
+            }
+        }
+        return theAttendanceRepository.save(theAttendance);
     }
 
     @Override
@@ -58,5 +71,10 @@ public class AttendanceServiceImpl implements AttendanceService {
     @Override
     public void deleteById(int id) {
         theAttendanceRepository.deleteById(id);
+    }
+
+    @Override
+    public Attendance findByPresentdate(LocalDate date) {
+        return theAttendanceRepository.findByPresentDate(date);
     }
 }
