@@ -40,6 +40,7 @@ public class Login_detailsController {
         Map<String, Object> result = new HashMap<>();
         Employee emp = theEmployeeService.findByEmail(email);
         Role role = null;
+        System.out.println(emp);
         if(emp != null){
             role = emp.getRole();
         }

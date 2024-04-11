@@ -24,12 +24,24 @@ public class PayrollController {
     @PostMapping("/addPayroll/{empId}")
     public Payroll addPayroll(@PathVariable(value="empId") int id,@RequestBody Payroll thePayroll)
     {
-//        Map<String, Object> result = new HashMap<>();
-//        boolean isPresent = false;
-//        String message = "";
+
         Employee emp = theEmployeService.findById(id);
         thePayroll.setEmployee(emp);
 
+        Payroll payroll=thePayrollService.save(thePayroll);
+        return payroll;
+    }
+
+    //This code is used to check if emp id is present in the payroll or not. if present return that it is present.
+//    @PostMapping("/addPayroll/{empId}")
+//    public ResponseEntity<Map<String, Object>> addPayroll(@PathVariable(value="empId") int id, @RequestBody Payroll thePayroll)
+//    {
+//        Map<String, Object> result = new HashMap<>();
+//        boolean isPresent = false;
+//        String message = "";
+//        Employee emp = theEmployeService.findById(id);
+//        thePayroll.setEmployee(emp);
+//
 //        List<Payroll> data = thePayrollService.findAll();
 //        for(int i =0; i<data.size(); i++){
 //            Payroll check = data.get(i);
@@ -43,10 +55,12 @@ public class PayrollController {
 //        }
 //        result.put("message",message);
 //        result.put("status",isPresent);
-//        Payroll checkPay = thePayrollService.findByEmpId(emp);
-        Payroll payroll=thePayrollService.save(thePayroll);
-        return payroll;
-    }
+//        if(isPresent == false){
+//            Payroll payroll=thePayrollService.save(thePayroll);
+//        }
+//        return new ResponseEntity<>(result, HttpStatus.OK);
+//    }
+
     @GetMapping("/payroll")
     public List<Payroll> findAll()
     {
